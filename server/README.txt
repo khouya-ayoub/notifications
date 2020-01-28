@@ -1,1 +1,2 @@
 Partie serveur
+Explication Farah
