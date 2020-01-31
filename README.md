@@ -3,8 +3,8 @@
  un Système de Notification PUSH pour la societé CERMIX
  
 # LES DEVELOPPEURS
- -- Ayoub KHOUYA : élève ingénieur en informatique \n
- -- Hamza HRAMCHI : élève ingénieur en informatique \n
- -- Yahya MOUSAOUI : élève ingénieur en informatique \n
+ Ayoub KHOUYA : élève ingénieur en informatique, 
+ | Hamza HRAMCHI : élève ingénieur en informatique 
+ | Yahya MOUSAOUI : élève ingénieur en informatique.
 
 # 
