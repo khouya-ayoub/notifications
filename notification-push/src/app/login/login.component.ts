@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthentificationService} from '../services/authentification.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +11,15 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   private authStatus: boolean;
-  private userName = 'test-user';
+  private userLogin: string;
+  private userPass: string;
 
   constructor(private authService: AuthentificationService, private router: Router) { }
 
   ngOnInit() {
     this.authStatus = this.authService.getAuthentification();
   }
-
+  /*
   onSignIn() {
     this.authService.signInUser().then(
       () => {
@@ -27,10 +29,27 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+  */
 
   onSignOut() {
     this.authService.sinOutUser();
     this.authStatus = this.authService.getAuthentification();
+  }
+
+  onSubmit(form: NgForm) {
+    console.log('Login : ' + form.value.email + '||' + form.value.pass);
+    this.userLogin = form.value.email;
+    this.userPass = form.value.pass;
+    this.authService.signInUser(this.userLogin, this.userPass).then(
+      (retour) => {
+        console.log('le résultat : ' + retour);
+        if (retour) {
+          this.router.navigate(['/dashboard']);
+        } else {
+          alert('Connexion échoué');
+        }
+      }
+    );
   }
 
 }

@@ -9,6 +9,7 @@ import { AuthentificationService } from './services/authentification.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import {AuthGuardService} from './services/auth-guard.service';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {AuthGuardService} from './services/auth-guard.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     AuthentificationService,

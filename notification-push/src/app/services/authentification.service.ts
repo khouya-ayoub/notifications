@@ -4,14 +4,18 @@ export class AuthentificationService {
   private isAuth = false;
 
   // connexion d'un utilisateur
-  signInUser() {
+  signInUser(login: string, pass: string) {
     return new Promise(
       (resolve, reject) => {
         setTimeout(
           () => {
-            this.isAuth = true;
-            resolve(true);
-          }, 2000
+            if (login === 'ayoub' && pass === '159') {
+              this.isAuth = true;
+            } else {
+              this.isAuth = false;
+            }
+            resolve(this.isAuth);
+          }, 10
         );
       }
     );
