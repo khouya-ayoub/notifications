@@ -2,6 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import {AuthentificationService} from '../services/authentification.service';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import Swal from 'sweetalert2';
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 
 @Component({
   selector: 'app-login',
@@ -44,24 +57,16 @@ export class LoginComponent implements OnInit {
       (retour) => {
         console.log('le résultat : ' + retour);
         if (retour) {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            onOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer);
-              toast.addEventListener('mouseleave', Swal.resumeTimer);
-            }
-          });
           Toast.fire({
             icon: 'success',
             title: 'Success'
           });
           this.router.navigate(['/dashboard']);
         } else {
-          alert('Connexion échoué');
+          Toast.fire({
+            icon: 'error',
+            title: 'Erreur'
+          });
         }
       }
     );
