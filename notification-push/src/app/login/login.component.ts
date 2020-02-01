@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.authStatus = this.authService.getAuthentification();
   }
-  
+
   onSignOut() {
     this.authService.sinOutUser();
     this.authStatus = this.authService.getAuthentification();
