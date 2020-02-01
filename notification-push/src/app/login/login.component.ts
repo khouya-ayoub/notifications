@@ -32,18 +32,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.authStatus = this.authService.getAuthentification();
   }
-  /*
-  onSignIn() {
-    this.authService.signInUser().then(
-      () => {
-        console.log('Authentification done !');
-        this.authStatus = this.authService.getAuthentification();
-        this.router.navigate(['dashboard']);
-      }
-    );
-  }
-  */
-
+  
   onSignOut() {
     this.authService.sinOutUser();
     this.authStatus = this.authService.getAuthentification();
