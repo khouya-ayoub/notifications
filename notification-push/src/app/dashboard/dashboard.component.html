@@ -1,9 +1,46 @@
-<h1>Bonjour {{ this.userName }}</h1>
-
-<p class="text-success">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam autem culpa eaque, eligendi eum
-  facilis fugiat neque omnis perferendis repellat reprehenderit rerum, totam, voluptates!
-  Ad aliquid eaque minus modi mollitia?
-</p>
-
+<div class="limiter">
+  <div class="container-dashboard">
+    <!--===============================================================================================-->
+    <div class="card offset-md col-md-4 border-light">
+      <img src="../../assets/dashboard/images/user_img.png" class="card-img-top" alt="user-image" width="100px" height="250px">
+      <div class="card-body">
+        <h4 class="card-title">Bonjour : {{ this.userName }} </h4>
+        <div class="card border-success ">
+          <div class="card-body text-success mb-10">
+            <h5 class="card-title">Système de notification PUSH</h5>
+            <p class="card-text">
+              Bonjour vous êtes connecté au système de notification PUSH pour CERMIX
+              ceci n'est qu'un dashboard de test pour simuler le fonctionnement du système !
+            </p>
+          </div>
+        </div>
+        <div class="card border-success" style="margin-top: 2px;">
+          <div class="card-body text-success mb-10">
+            <h5 class="card-title">Vous avez :
+              <span class="badge badge-pill badge-light">20</span>
+              Notifications non lus</h5>
+          </div>
+        </div>
+        <div class="card border-success" style="margin-top: 2px;">
+          <div class="card-body text-secondary mb-10">
+            <h5 class="card-title">
+              Activer/Désactiver les notifications !
+            </h5>
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="switchEtatNotif">
+              <label class="custom-control-label" for="switchEtatNotif">Changer état</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <a class="col-md btn btn-danger">Déconnexion</a>
+        <a class="offset-md-1 col-md btn btn-primary">Informations</a>
+        <a class="offset-md-1 col-md btn btn-warning">Notification</a>
+      </div>
+    </div>
+    <!--===============================================================================================-->
+  </div>
+</div>
 
 

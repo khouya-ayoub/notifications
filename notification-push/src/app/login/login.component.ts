@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 const Toast = Swal.mixin({
   toast: true,
-  position: 'top-end',
+  position: 'top',
   showConfirmButton: false,
   timer: 3000,
   timerProgressBar: true,
@@ -48,13 +48,13 @@ export class LoginComponent implements OnInit {
         if (retour) {
           Toast.fire({
             icon: 'success',
-            title: 'Success'
+            title: 'Connexion réussie'
           });
           this.router.navigate(['/dashboard']);
         } else {
           Toast.fire({
             icon: 'error',
-            title: 'Erreur'
+            title: 'Login ou mot de pass incorrecte'
           });
         }
       }

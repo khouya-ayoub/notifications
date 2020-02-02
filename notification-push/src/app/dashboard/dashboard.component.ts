@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.userName = this.route.snapshot.params.user;
+    // this.userName = this.route.snapshot.params.user;
   }
 
 }
