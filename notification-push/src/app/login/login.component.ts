@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
     this.userPass = form.value.pass;
     this.authService.signInUser(this.userLogin, this.userPass).then(
       (retour) => {
-        console.log('le résultat : ' + retour);
         if (retour) {
           Toast.fire({
             icon: 'success',

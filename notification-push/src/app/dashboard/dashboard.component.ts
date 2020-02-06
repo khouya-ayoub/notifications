@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {AuthentificationService} from '../services/authentification.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,12 +9,12 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  private userName = 'Ayoub';
+  private userName: string;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private auth: AuthentificationService) { }
 
   ngOnInit() {
-    // this.userName = this.route.snapshot.params.user;
+    this.userName = this.auth.getUser().getNom();
   }
 
 }

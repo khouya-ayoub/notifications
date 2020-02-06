@@ -9,7 +9,8 @@ import { AuthentificationService } from './services/authentification.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import {AuthGuardService} from './services/auth-guard.service';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     AuthentificationService,
