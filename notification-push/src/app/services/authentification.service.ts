@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Md5 } from 'ts-md5';
 import {User} from '../models/user.model';
+import {CookieService} from 'ngx-cookie-service';
 
 const serveurUrl = 'http://127.0.0.1:80/AJAX/server/sv.php';
 
@@ -13,12 +14,13 @@ export class AuthentificationService {
   };
 
 
-  constructor(private serveur: HttpClient) {
+  constructor(private serveur: HttpClient, private cookieService: CookieService) {
   }
 
-  // Status d'un utilisateur pardéfaut  non authentifié
+  // Status d'un utilisateur par défaut  non authentifié
   private isAuth = false;
   private user: User;
+  private userCookies: any;
 
   // connexion d'un utilisateur
   signInUser(login: string, pass: string) {
@@ -29,6 +31,20 @@ export class AuthentificationService {
             if (result.autorisation) {
               this.isAuth = result.autorisation;
               this.user = new User(this.isAuth, result.MUS_NOM, result.MUS_PRENOM, result.MUS_FONCTION);
+              // check if the display is already know
+              if (this.cookieService.check('mobility-cookies')) {
+                this.userCookies = JSON.parse(this.cookieService.get('mobility-cookies'));
+                console.log(this.userCookies.mobilityTocken);
+                this.user.setExiste(true);
+              } else {
+                this.userCookies = {
+                  mobilityTocken : 'TockenTockenTockenTockenTockenTocken',
+                  dispalyId : 1
+                };
+                this.cookieService.set('mobility-cookies', JSON.stringify(this.userCookies), 50, './', 'mobility-push', true, 'Lax');
+                this.user.setExiste(false);
+                console.log('Création de cookies');
+              }
             } else {
               this.isAuth = result.autorisation;
             }
@@ -36,7 +52,7 @@ export class AuthentificationService {
           },
           (err) => {
             console.log(err.message);
-            reject();
+            reject('Erreur de connexion serveur !');
           }
         );
       }
@@ -58,7 +74,7 @@ export class AuthentificationService {
     return this.serveur.post<any>(serveurUrl, {
       functionToExecute: 'signInUser',
       _login: userLogin,
-      _password: Md5.hashStr(userPass)
+      _password: userPass
     }, {
       responseType: 'json'
     });

@@ -11,6 +11,7 @@ import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import {AuthGuardService} from './services/auth-guard.service';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   providers: [
     AuthentificationService,
-    AuthGuardService
+    AuthGuardService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

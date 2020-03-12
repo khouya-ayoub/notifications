@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         if (retour) {
           Toast.fire({
             icon: 'success',
-            title: 'Connexion réussie'
+            title: 'Connexion réussie ' + this.authService.getUser().getExiste()
           });
           this.router.navigate(['/dashboard']);
         } else {

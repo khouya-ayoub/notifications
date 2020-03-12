@@ -3,7 +3,9 @@ export class User {
     private status: boolean,
     private nom: string,
     private prenom: string,
-    private fonction: string
+    private fonction: string,
+    private tockenMobility?: string,
+    private existe?: boolean
   ) {
 
   }
@@ -25,9 +27,21 @@ export class User {
     this.status = status;
   }
 
+  setTocken(tocken) {
+    this.tockenMobility = tocken;
+  }
+
+  setExiste(existe) {
+    this.existe = existe;
+  }
+
   // getters
   getNom() {
     return this.nom;
+  }
+
+  getExiste() {
+    return this.existe;
   }
 
   getPrenom() {
