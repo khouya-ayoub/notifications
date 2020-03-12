@@ -9,7 +9,7 @@ import {AuthentificationService} from '../services/authentification.service';
 })
 export class DashboardComponent implements OnInit {
 
-  private userName: string;
+  userName: string;
 
   constructor(private route: ActivatedRoute, private auth: AuthentificationService) { }
 

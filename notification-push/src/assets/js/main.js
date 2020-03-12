@@ -50,3 +50,25 @@
         $(thisAlert).removeClass('alert-validate');
     }
 })(jQuery);
+
+// ************************************** **//
+
+// Service Worker
+/*
+if ('serviceWorker' in navigator && 'PushManager' in window) {
+  console.log('SW and Push are supported !!');
+
+  // registering the SW
+  navigator.serviceWorker.register('sw.js')
+    .then(function (swReg) {
+      console.log('Service Worker is Registred', swReg);
+      swRegistration = swReg;
+    })
+    .catch(function (error) {
+      console.error('Service Worker error', error);
+    });
+} else {
+  console.warn('Push messaging is not supported !');
+  pushButton.textContent = 'Push not Supported';
+}
+*/
