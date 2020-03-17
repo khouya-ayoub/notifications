@@ -6,5 +6,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="server" />
     <orderEntry type="module" module-name="AJAX" />
+    <orderEntry type="module" module-name="go-full-stack" />
   </component>
 </module>
