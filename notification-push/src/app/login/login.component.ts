@@ -3,6 +3,7 @@ import {AuthentificationService} from '../services/authentification.service';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import Swal from 'sweetalert2';
+import {SwPush} from '@angular/service-worker';
 
 const Toast = Swal.mixin({
   toast: true,
@@ -23,11 +24,13 @@ const Toast = Swal.mixin({
 })
 export class LoginComponent implements OnInit {
 
+  readonly VAPID_PUBLIC_KEY = 'BCT2k3SB7ik0ImupHWPcFg_otJaPHYvy0omRIsT9owvMCUw93ZjmcPMbpj4JkDMgyyss9LdVJg5sPf6z8Xt6G34';
+
   private authStatus: boolean;
   private userLogin: string;
   private userPass: string;
 
-  constructor(private authService: AuthentificationService, private router: Router) { }
+  constructor(private authService: AuthentificationService, private router: Router, readonly swPush: SwPush) { }
 
   ngOnInit() {
     this.authStatus = this.authService.getAuthentification();
@@ -58,6 +61,20 @@ export class LoginComponent implements OnInit {
         }
       }
     );
+  }
+
+  private async subscribeToPush() {
+    try {
+      const sub = await this.swPush.requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY,
+      });
+    } catch (err) {
+      console.error('Could not subscribe due to :', err);
+    }
+  }
+
+  subToNotif() {
+    return this.subscribeToPush();
   }
 
 }
