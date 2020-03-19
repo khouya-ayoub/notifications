@@ -1,0 +1,11 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Back end of mobility push system using Express Framework",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ayoub KHOUYA || Hramchi HAMZA || Yahya MOUSSAOUI",
+  "license": "ISC"
+}
