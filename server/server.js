@@ -1,3 +1,11 @@
+/**
+ * This file contains the routes for roots that manipulate the data base.
+ * Please be careful when you change something or you add something, and please
+ * add a commenter line that describe your code you had added, and if you can
+ * add a test-script for your code in the folder ../tests/tests_---.js.
+ *                              Thank you !
+ * */
+
 const http = require('http');
 const app = require('./app');
 

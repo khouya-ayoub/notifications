@@ -10,7 +10,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 // import data base router
-const databaseRouter = require('./routes/data-base');
+const databaseRouters = require('./routes/data-base');
+// import user router
+const userRouters = require('./routes/user');
 
 // init app
 const app = express();
@@ -27,7 +29,9 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 // use the roots of data base
-app.use('/api/db', databaseRouter);
+app.use('/api/db', databaseRouters);
+// use the roots of user
+app.use('/api/auth', userRouters);
 
 // export the app
 module.exports = app;

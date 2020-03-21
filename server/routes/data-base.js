@@ -11,9 +11,11 @@ const express = require('express');
 const router = express.Router();
 // imports functions and methods
 const databaseController = require('../controllers/data-base');
+// import the middleware
+const authMiddleware = require('../middleware/auth');
 
 // Request for authentication to the system
-router.get('/:login/:password', databaseController.login);
+router.get('/:login/:password', authMiddleware, databaseController.login);
 
 /**
  * Export the router

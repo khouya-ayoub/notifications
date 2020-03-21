@@ -15,7 +15,7 @@ const json = require('json');
 const conn = db_conn.connexion;
 
 const database_functions = {
-    login: (request, response) => {
+    login: (request, response, next) => {
         /**
          * the login function
          * @first test for existing user login
