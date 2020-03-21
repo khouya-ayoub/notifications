@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://C:/xampp/htdocs/AJAX/.idea/AJAX.iml" filepath="C:/xampp/htdocs/AJAX/.idea/AJAX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../go-full-stack/.idea/go-full-stack.iml" filepath="$PROJECT_DIR$/../go-full-stack/.idea/go-full-stack.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/notifications.iml" filepath="$PROJECT_DIR$/.idea/notifications.iml" />
+      <module fileurl="file://C:/xampp/htdocs/AJAX/server/.idea/server.iml" filepath="C:/xampp/htdocs/AJAX/server/.idea/server.iml" />
     </modules>
   </component>
 </project>
