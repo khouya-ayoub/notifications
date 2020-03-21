@@ -1,6 +1,16 @@
+/**
+ * This file contains the routes for roots that manipulate the data base.
+ * Please be careful when you change something or you add something, and please
+ * add a commenter line that describe your code you had added, and if you can
+ * add a test-script for your code in the folder ../tests/tests_---.js.
+ *                              Thank you !
+ * */
+
 const express = require('express');
 const bodyParser = require('body-parser');
-const db_funct = require('./data_base/functions');
+
+// import data base router
+const databaseRouter = require('./routes/data-base');
 
 // init app
 const app = express();
@@ -16,10 +26,8 @@ app.use((req, res, next) => {
 // transform
 app.use(bodyParser.json());
 
-// Request for authentication to the system
-app.get('/auth/:login/:password',(request, response, next) => {
-    db_funct.login(request, response);
-});
+// use the roots of data base
+app.use('/api/db', databaseRouter);
 
 // export the app
 module.exports = app;
