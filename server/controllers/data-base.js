@@ -7,15 +7,15 @@
  * */
 
 // import db_connexion module and all required modules
-const db_conn = require('./db_connexion');
+const db_conn = require('./connexion');
 const log = require('../log_server/log_server');
 const json = require('json');
 
 // the connexion
 const conn = db_conn.connexion;
 
-let database_functions = {
-    login: function (request, response) {
+const database_functions = {
+    login: (request, response) => {
         /**
          * the login function
          * @first test for existing user login
@@ -45,6 +45,12 @@ let database_functions = {
                 });
             }
         });
+    },
+    checkForNotification: () => {
+        /**
+         * TODO: description of this function
+         * */
+
     }
 };
 
