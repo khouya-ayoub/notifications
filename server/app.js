@@ -13,6 +13,10 @@ const bodyParser = require('body-parser');
 const databaseRouters = require('./routes/data-base');
 // import user router
 const userRouters = require('./routes/user');
+// import test router
+const testRouter = require('./routes/test');
+// import notification router
+const notificationRouter = require('./routes/notification');
 
 // init app
 const app = express();
@@ -27,11 +31,20 @@ app.use((req, res, next) => {
 
 // transform
 app.use(bodyParser.json());
-
-// use the roots of data base
+/**
+ * Add Routers
+ * */
+// use the routes of data base
 app.use('/api/db', databaseRouters);
-// use the roots of user
+// use the routes of user
 app.use('/api/auth', userRouters);
+// test routes
+app.use('/test', testRouter);
+// notification routes
+app.use('/api/notification', notificationRouter);
 
-// export the app
+
+/**
+ * export the app
+ */
 module.exports = app;
