@@ -10,6 +10,7 @@ export class AuthService {
   private isAuth$ = new BehaviorSubject<boolean>(false);
   private tocken: string;
   private userId: string;
+  private useerName: string;
 
   constructor(
     private serveur: HttpClient
@@ -22,10 +23,12 @@ export class AuthService {
           { email: login, motdepass: password },
           { responseType: 'json' })
           .subscribe(
-            (authData: { tocken: string, userId: string }) => {
+            (authData: { tocken: string, _userId: string, userName: string }) => {
               this.tocken = authData.tocken;
-              this.userId = authData.userId;
+              this.userId = authData._userId;
+              this.useerName = authData.userName;
               this.isAuth$.next(true);
+              console.log(this.userId);
               resolve();
             },
             (error) => {
@@ -39,9 +42,17 @@ export class AuthService {
   logout() {
     this.isAuth$.next(false);
     this.userId = null;
+    this.useerName = null;
     this.tocken = null;
   }
 
+  getUserName() {
+    return this.useerName;
+  }
+
+  getUserId() {
+    return this.userId;
+  }
   singup() {}
 
   getAuthStatus() {

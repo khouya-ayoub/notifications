@@ -10,8 +10,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import {AuthGuardService} from './services/auth-guard.service';
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {NotificationService} from './services/notification.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   ],
   providers: [
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })
