@@ -12,6 +12,8 @@ export class DashboardComponent implements OnInit {
 
   private publicKey = 'BJthRQ5myDgc7OSXzPCMftGw-n16F7zQBEN7EUD6XxcfTTvrLGWSIG7y_JxiWtVlCFua0S8MTB5rPziBqNx1qIo';
   userName: string;
+  etat = false;
+  etatDeNotification: string;
 
   constructor(
     private auth: AuthService,
@@ -21,6 +23,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.userName = this.auth.getUserName();
+    this.etat = this.auth.getUserEtatSub();
+    this.changeEtat();
   }
 
   logout() {
@@ -28,7 +32,28 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
+  changeEtat() {
+    if (this.etat) {
+      this.etatDeNotification = "Notification activée";
+    } else {
+      this.etatDeNotification = "Notification désactivée";
+    }
+  }
+
   checkAuthorization() {
-    this.notifService.subscribeServiceWorker(this.publicKey);
+    this.etat = !this.etat;
+    this.changeEtat();
+    if (this.etat) {
+      this.notifService.changeStateOfSubscription(1, this.auth.getUserId())
+        .then( (res) =>{
+          console.log(res);
+        } );
+      this.notifService.subscribeServiceWorker(this.publicKey);
+    } else {
+      this.notifService.changeStateOfSubscription(0, this.auth.getUserId())
+        .then( (res) => {
+          console.log(res);
+        });
+    }
   }
 }

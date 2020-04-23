@@ -20,8 +20,8 @@
     <div class="card">
       <div class="card-body">
         <div class="custom-control custom-switch">
-          <label class="custom-control-label " for="customSwitch1"><b>Activer/désactiver les notifications</b></label>
-          <input type="checkbox" class="custom-control-input" id="customSwitch1" (click)="checkAuthorization()">
+          <input type="checkbox" class="custom-control-input" id="etatDeSubscription" [checked]="etat" (change)="checkAuthorization()">
+          <label class="custom-control-label" for="etatDeSubscription">{{ etatDeNotification }}</label>
         </div>
       </div>
     </div>
