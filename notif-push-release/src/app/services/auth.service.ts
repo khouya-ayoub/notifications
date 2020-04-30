@@ -9,8 +9,9 @@ export class AuthService {
   private serverUrl = 'http://localhost:3000/api/auth/signin';
   private isAuth$ = new BehaviorSubject<boolean>(false);
   private tocken: string;
-  private userId: string;
+  private userId: number;
   private useerName: string;
+  private userEtatSub: number;
 
   constructor(
     private serveur: HttpClient
@@ -23,12 +24,12 @@ export class AuthService {
           { email: login, motdepass: password },
           { responseType: 'json' })
           .subscribe(
-            (authData: { tocken: string, _userId: string, userName: string }) => {
+            (authData: { tocken: string, _userId: number, userName: string, userEtatSub: number}) => {
               this.tocken = authData.tocken;
               this.userId = authData._userId;
               this.useerName = authData.userName;
+              this.userEtatSub = authData.userEtatSub;
               this.isAuth$.next(true);
-              console.log(this.userId);
               resolve();
             },
             (error) => {
@@ -57,6 +58,10 @@ export class AuthService {
 
   getAuthStatus() {
     return this.isAuth$.getValue();
+  }
+
+  getUserEtatSub() {
+    return (this.userEtatSub === 1);
   }
 
 }

@@ -4,13 +4,18 @@
  * */
 
 import {Injectable} from '@angular/core';
-import {AuthService} from '../services/auth.service';
+import {AuthService} from './auth.service';
+import {HttpClient} from "@angular/common/http";
+import {rejects} from "assert";
 
 @Injectable()
 export class NotificationService {
 
+  private serverUrl = 'http://localhost:3000/api/db/modif-state-sub';
+
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private serveur: HttpClient
   ) {
   }
 
@@ -20,6 +25,9 @@ export class NotificationService {
       this.send(publicKey)
         .catch(err => {
           console.error(err);
+        })
+        .then(() => {
+          console.log('envoie');
         });
     }
   }
@@ -69,5 +77,21 @@ export class NotificationService {
       outputArray[i] = rawData.charCodeAt(i);
     }
     return outputArray;
+  }
+
+  changeStateOfSubscription(state: number, iduser: number) {
+    return new Promise((resolve, reject) => {
+      this.serveur
+        .post(this.serverUrl,
+          { etatsub: state,
+                  idUser: iduser },
+          {responseType: 'json'})
+        .subscribe(( response: { state: boolean} ) => {
+            resolve(response.state);
+        }, (error) => {
+
+        });
+    });
+
   }
 }
