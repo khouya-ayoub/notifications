@@ -11,29 +11,29 @@ const conn = db_conn.connexion;
 
 const user_functions = {
     signup: (request, response, next) => {
-        // first thing crypt the password
-        bcrypt.hash(request.body.password, 10)
-            .then(hash => {
-                // when the password is crypted successfully
-                let sql ="INSERT INTO mb_users (MUS_NOM, MUS_PRENOM, MUS_LOGIN, MUS_PASSWORD, MUS_FONCTION, MUS_QUICREAT, MUS_DATECREAT) VALUES ?";
-                let values = ['BACKEND','BACKEND',request.body.login,hash,'BACKEND','TEST','2020-03-21'];
-                conn.query(sql, [[values]], (err, res) => {
-                    if (err || res.affectedRows === 0) {
-                        log(__filename + " signup()", "error while creating a new user !");
-                        return response.status(400).json({ error: 'error ' + err, message: 'No user !'});
-                    } else {
-                        log(__filename + " signup()", "user created successfully : " + request.body.login);
-                        return response.status(200).json({
-                            status: '200',
-                            message: 'User created successfully !'
-                        });
-                    }
-                });
-            })
-            .catch(error => response.status(500).json({
-                error
-            }));
-    },
+            // first thing crypt the password
+            bcrypt.hash(request.body.password, 10)
+                .then(hash => {
+                    // when the password is crypted successfully
+                    let sql ="INSERT INTO mb_users (MUS_NOM, MUS_PRENOM, MUS_LOGIN, MUS_PASSWORD, MUS_FONCTION, MUS_QUICREAT, MUS_DATECREAT) values(?)";
+                    let values = ['BACKEND','BACKEND',request.body.login,hash,'BACKEND','TEST','2020-03-21'];
+                    conn.query(sql, [[values]], (err, res) => {
+                        if (err || res.affectedRows === 0) {
+                            log(__filename + " signup()", "error while creating a new user !");
+                            return response.status(400).json({ error: 'error ' + err, message: 'No user !'});
+                        } else {
+                            log(__filename + " signup()", "user created successfully : " + request.body.login);
+                            return response.status(200).json({
+                                status: '200',
+                                message: 'User created successfully !'
+                            });
+                        }
+                    });
+                })
+                .catch(error => response.status(500).json({
+                    error
+                }));
+        },
     signin: (request, response, next) => {
         // first look for the user login
         let sql = "SELECT * FROM mb_users WHERE mus_login = ?";

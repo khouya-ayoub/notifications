@@ -1,5 +1,8 @@
 /**
- * Todo: doc subscription model
+ * Description of a subscription
+ *    endpoint:
+ *    auth:
+ *    p256dh
  * */
 
 const subscription_model = {

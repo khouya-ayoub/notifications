@@ -93,6 +93,50 @@ const database_functions = {
                 }
             });
         });
+    },
+    promiseGetEtatSubscription: (idUser) => {
+        return new Promise( (resolve, reject) => {
+            let sql = "SELECT MUS_ETATSUBSCRIPTION FROM mb_users WHERE MUS_IDUSER = ?";
+            conn.query(sql, [idUser], (err, res) => {
+                if(err || res.length === 0){
+                    console.log(err);
+                    resolve(false);
+                }
+                if (res[0].MUS_ETATSUBSCRIPTION === 1){
+                    resolve(true);
+                } else {
+                    console.log(res);
+                    resolve(false);
+                }
+            });
+        });
+    },
+    changeEtatEnvoieNotification: (idUser, idNotification) => {
+        return new Promise((resolve, reject) => {
+            /**
+             * todo :
+             * */
+            let sql = "UPDATE mb_envoie set men_etatenvoie = 1 where men_iduser = ? AND men_idnotification = ?";
+            conn.query(sql, [idUser, idNotification], (err, res) => {
+                if (err || (res.length === 0))  {
+                    reject();
+                } else {
+                    resolve();
+                }
+            });
+        })
+    },
+    changeStateOfSubscription: (request, response, next) => {
+        let sql = "UPDATE mb_users set mus_etatsubscription = ? where mus_iduser = ?";
+        conn.query(sql, [request.body.etatsub, request.body.idUser], (err,res) => {
+            if(err || res.length === 0){
+                console.log(err);
+                return response.status(400).json( {message: 'erreur de modification', state: false } );
+            }
+            else{
+                return response.status(200).json( {message: 'modification réussite', state: true});
+            }
+        });
     }
 };
 

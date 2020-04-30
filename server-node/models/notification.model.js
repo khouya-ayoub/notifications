@@ -1,5 +1,5 @@
 /**
- * Todo:
+ * Description of notification !
  * */
 
 const notification_model = {
