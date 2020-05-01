@@ -13,6 +13,9 @@ import {AuthGuardService} from './services/auth-guard.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {NotificationService} from './services/notification.service';
+import { AddNotificationComponent } from './add-notification/add-notification.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { ListNotificationsComponent } from './list-notifications/list-notifications.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import {NotificationService} from './services/notification.service';
     LoginComponent,
     SignupComponent,
     NotFoundComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddNotificationComponent,
+    AddUserComponent,
+    ListNotificationsComponent
   ],
   imports: [
     BrowserModule,
