@@ -54,6 +54,7 @@ export class AuthService {
   getUserId() {
     return this.userId;
   }
+
   singup() {}
 
   getAuthStatus() {

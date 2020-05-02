@@ -3,9 +3,47 @@
   <h5 class="text-uppercase text-light js-scroll-trigger">CERMIX Mobility Interface des notifications</h5>
 </nav>
 
-<!-- Masthead-->
-<header class="masthead bg-default text-black text-center">
+<div class="container" style="margin-top: 150px" id="formContent">
+  <h3 class="font-weight-bold text-center text-info">Céer une notification</h3>
+  <form [formGroup]="addNotificationForm" (ngSubmit)="onSubmitAddNotifForm()">
+    <div class="form-group">
+      <label class="font-weight-bold" for="titre">Titre</label>
+      <input type="text" class="form-control" id="titre" name="titre" placeholder="Le titre de la notification" formControlName="titre">
+    </div>
 
-</header>
+    <div class="form-group">
+      <label class="font-weight-bold" for="description">Description</label>
+      <textarea name="description" id="description" class="form-control" cols="20" rows="5" formControlName="description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="font-weight-bold" for="type">Type</label>
+      <select class="form-control" id="type" name="type" formControlName="type">
+        <option value="0">individuelle</option>
+        <option value="1">groupée</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="font-weight-bold" for="cible">Cible</label>
+      <select class="form-control" id="cible" name="cible" formControlName="cible">
+        <option value="2">Ayoub</option>
+        <option value="3">Yahya</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="font-weight-bold" for="qui">Qui a créé ?</label>
+      <input type="text" class="form-control" id="qui" name="qui" placeholder="Qui a créé la notification ?" formControlName="qui">
+    </div>
+
+    <div class="form-group">
+      <label class="font-weight-bold" for="date">Date de création</label>
+      <input type="date" class="form-control" id="date" name="date" placeholder="La date de création de la notification" formControlName="date">
+    </div>
+
+    <button type="submit" class="btn btn-success form-control" type="submit">Enregistrer la notification</button>
+  </form>
+</div>
 
 <script src="../../assets/js/scripts.js"></script>
