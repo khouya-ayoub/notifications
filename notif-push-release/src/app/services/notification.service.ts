@@ -12,6 +12,9 @@ import {rejects} from "assert";
 export class NotificationService {
 
   private serverUrl = 'http://localhost:3000/api/db/modif-state-sub';
+  private serverUrlAddNotif = 'http://localhost:3000/api/db/add-notification';
+  private serverUrlAddUser = 'http://localhost:3000/api/db/add-user';
+  private serverUrlGetNotifications = 'http://localhost:3000/api/db/get-notifications';
 
   constructor(
     private auth: AuthService,
@@ -93,5 +96,63 @@ export class NotificationService {
         });
     });
 
+  }
+
+  addNotification(titre: string, description: string, type: number, cible: number, qui: string, date: string) {
+    return new Promise((resolve, reject) => {
+      this.serveur
+        .post(this.serverUrlAddNotif,
+          {
+            titre: titre,
+            description: description,
+            type: type,
+            cible: cible,
+            qui: qui,
+            date: date
+          },
+          {responseType: 'json'})
+        .subscribe(( response ) => {
+          resolve(response);
+        }, (error) => {
+
+        });
+    });
+  }
+
+  addUser(nom: string, prenom: string, login: string, password: string, group: number, qui: string, date: string) {
+    return new Promise((resolve, reject) => {
+      this.serveur
+        .post(this.serverUrlAddUser,
+          {
+            nom: nom,
+            prenom: prenom,
+            login: login,
+            password: password,
+            group: group,
+            qui: qui,
+            date: date
+          },
+          {responseType: 'json'})
+        .subscribe((rep ) => {
+          resolve(rep);
+        }, (error) => {
+
+        });
+    });
+  }
+
+  getNotification() {
+    return new Promise((resolve, reject) => {
+      this.serveur
+        .post(this.serverUrlGetNotifications,
+          {
+            idUser: this.auth.getUserId()
+          },
+          {responseType: 'json'})
+        .subscribe((response: { message: string, notifications: any }) => {
+          console.log(response.notifications);
+          resolve(response);
+        });
+    });
   }
 }

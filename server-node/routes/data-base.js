@@ -18,6 +18,10 @@ const authMiddleware = require('../middleware/auth');
 // Request for authentication to the system
 router.post('/', authMiddleware, databaseController.login);
 router.post('/modif-state-sub', databaseController.changeStateOfSubscription);
+router.post('/savesubscription', databaseController.saveSubscription);
+router.post('/add-notification', databaseController.addNotification);
+router.post('/add-user', databaseController.addUser);
+router.get('/get-notifications', databaseController.getUserNotifications);
 
 /**
  * Export the router

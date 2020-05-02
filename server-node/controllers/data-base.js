@@ -137,6 +137,43 @@ const database_functions = {
                 return response.status(200).json( {message: 'modification réussite', state: true});
             }
         });
+    },
+    addNotification: (request, response, next) => {
+        let notif = request.body;
+        let sql = "INSERT INTO mb_notifications(MNO_TITRE, MNO_DESCRIPTION, MNO_TYPE, MNO_CIBLE, MNO_QUICREAT, MNO_DATECREAT) values(?,?,?,?,?,?)";
+        conn.query(sql, [notif.titre, notif.description, notif.type, notif.cible, notif.qui, notif.date], (err, res) => {
+            if (err || (res.length === 0))  {
+                console.log("Errreur insertion :" + err);
+            } else {
+                console.log(" insertion réussite ");
+            }
+        })
+    },
+    addUser: (request, response, next) => {
+        // first thing crypt the password
+        bcrypt.hash(request.body.password, 10)
+            .then(hash => {
+                let user = request.body;
+                // when the password is crypted successfully
+                let sql ="INSERT INTO mb_users (MUS_NOM, MUS_PRENOM, MUS_LOGIN, MUS_PASSWORD, MUS_GROUP, MUS_QUICREAT, MUS_DATECREAT) values(?)";
+                let values = [user.nom,user.prenom,user.login,hash, user.group,user.qui,user.date];
+                conn.query(sql, [values], (err, res) => {
+                    if (err || res.affectedRows === 0) {
+                        log(__filename + " signup()", "error while creating a new user !");
+                        console.log(err);
+                        return response.status(400).json({ error: 'error ' + err, message: 'error'});
+                    } else {
+                        log(__filename + " signup()", "user created successfully : " + request.body.login);
+                        return response.status(200).json({
+                            status: '200',
+                            message: 'User created successfully !'
+                        });
+                    }
+                });
+            })
+            .catch(error => response.status(500).json({
+                error
+            }));
     }
 };
 

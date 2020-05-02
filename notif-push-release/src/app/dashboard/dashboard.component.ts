@@ -56,4 +56,8 @@ export class DashboardComponent implements OnInit {
         });
     }
   }
+
+  toNotifications() {
+    this.router.navigate(['list-notifications']);
+  }
 }

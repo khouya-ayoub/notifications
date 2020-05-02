@@ -7,7 +7,7 @@ self.addEventListener("push", (e) => {
   console.log("Push Recieved...");
   self.registration.showNotification(data.title,{
     body: data.description,
-    icon: "logo.jpg",
+    icon: "../images/logo-cermix.png"
   });
   return true;
 });
