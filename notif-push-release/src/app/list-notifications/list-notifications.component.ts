@@ -17,7 +17,9 @@ export class ListNotificationsComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.notif.getNotification().then();
+    this.notif.getNotification().then(() => {
+      this.listnotif = this.notif.getListOfNotifications();
+    });
   }
 
   logout() {
@@ -27,5 +29,9 @@ export class ListNotificationsComponent implements OnInit {
 
   retour() {
     this.router.navigate(['dashboard']);
+  }
+
+  onchangeState(idNotif: number) {
+    this.notif.changeStateRead(idNotif);
   }
 }

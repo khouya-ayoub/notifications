@@ -1,3 +1,11 @@
+/*
+ * Ce projet est développé par les élèves ingénieurs :
+ *      - Ayoub KHOUYA      -     a.khouya.ing@gmail.com
+ *      - Hamza HRAMCHI      -     hramchi.hamza@gmail.com
+ *      - Yahya MOUSAOUI      -     yahyamoussaoui2014@gmail.com
+ * Copyright (c) 2020.
+ */
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,8 +26,8 @@ public class SettingsSystem {
     public static final String password = "";
 
     // des requetes utilisées
-    public static final String sqlSelectNotifications = "SELECT mno_idnotification, mno_cible FROM mb_notifications WHERE mno_etat = 0";
-    public static final String sqlSelectFromEnvoieToNotify = "SELECT men_iduser, men_iduser FROM mb_envoie WHERE men_etatenvoie = 0";
+    public static final String sqlSelectNotifications = "SELECT mno_idnotification, mno_type, mno_cible FROM mb_notifications WHERE mno_etat = 0";
+    public static final String sqlSelectFromEnvoieToNotify = "SELECT men_iduser FROM mb_envoie WHERE men_etatenvoie = 0";
 
     // lien de connexion avec le serveur node JS
     public static final String urlServeurTransit = "http://localhost:3000/api/notification/send-notification-to-user";

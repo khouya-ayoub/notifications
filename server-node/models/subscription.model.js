@@ -1,19 +1,19 @@
 /**
- * Description of a subscription
- *    endpoint:
- *    auth:
- *    p256dh
+ * Todo: doc subscription model
  * */
 
 const subscription_model = {
     createSubrcription: (endpoint, auth, p256dh) => {
-        return {
+        /**
+         * */
+        let subscription = {
             endpoint: endpoint,
             keys: {
                 auth: auth,
                 p256dh: p256dh
             }
         };
+        return subscription;
     }
 };
 

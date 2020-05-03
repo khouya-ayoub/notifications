@@ -1,4 +1,12 @@
 
+/*
+ * Ce projet est développé par les élèves ingénieurs :
+ *      - Ayoub KHOUYA      -     a.khouya.ing@gmail.com
+ *      - Hamza HRAMCHI      -     hramchi.hamza@gmail.com
+ *      - Yahya MOUSAOUI      -     yahyamoussaoui2014@gmail.com
+ * Copyright (c) 2020.
+ */
+
 import org.json.JSONObject;
 
 import java.net.URI;
@@ -28,10 +36,13 @@ public class ThreadNotifierServeur extends Thread {
                     while(resultSet.next()){
                         new ThreadNotifier(resultSet.getInt("men_iduser")).start();
                     }
-                }catch(SQLException ignored){}
+                }catch(Exception e){
+                    e.getMessage();
+                    System.out.println("Connexion echouée à la base de données ");
+                }
                 Thread.sleep(SettingsSystem.timeOfNotification);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                e.getMessage();
                 this.run();
             }
         }

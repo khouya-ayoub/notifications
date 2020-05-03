@@ -1,4 +1,12 @@
 
+/*
+ * Ce projet est développé par les élèves ingénieurs :
+ *      - Ayoub KHOUYA      -     a.khouya.ing@gmail.com
+ *      - Hamza HRAMCHI      -     hramchi.hamza@gmail.com
+ *      - Yahya MOUSAOUI      -     yahyamoussaoui2014@gmail.com
+ * Copyright (c) 2020.
+ */
+
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -17,6 +25,7 @@ public class ThreadConsulation extends Thread {
             try {
                 try {
                     Connection connection = SettingsSystem.getConnection();
+                    assert connection != null;
                     Statement statement = connection.createStatement();
                     ResultSet resultSet = statement.executeQuery(SettingsSystem.sqlSelectNotifications);
                     while (resultSet.next()) {
@@ -37,7 +46,10 @@ public class ThreadConsulation extends Thread {
                     }
                     statement.close();
                     connection.close();
-                } catch (SQLException ignored) { }
+                } catch (Exception e) {
+                    e.getMessage();
+                    System.out.println("Connexion echouée à la base de données ");
+                }
                 Thread.sleep(SettingsSystem.timeOfConsultation);
             } catch (InterruptedException e) {
                 e.printStackTrace();

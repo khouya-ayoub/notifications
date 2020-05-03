@@ -1,20 +1,25 @@
-/**
- * Todo:
- * */
+
 const webpush = require('web-push');
 const databaseController = require('./data-base');
-const vapid_keys = require('../settings/vapid-keys');
+
+// TODO : placer !
+const publicVapidKey  =  "BJthRQ5myDgc7OSXzPCMftGw-n16F7zQBEN7EUD6XxcfTTvrLGWSIG7y_JxiWtVlCFua0S8MTB5rPziBqNx1qIo";
+const privateVapidKey =  "3KzvKasA2SoCxsp0iIG_o9B0Ozvl1XDwI63JRKNIWBM";
 
 
 const notif_functions = {
-    subscribeUser: (request, response, next) => {
-        webpush.setVapidDetails("mailto:", vapid_keys.publicKey, vapid_keys.privateKey);
-        let subscription = request.body.subNot;
-        let payload = JSON.stringify({
-            title: "SUBSCRIPTION",
-            description: "SUBSCRIPTION AU SERVICE PUSH DE MOBILITY CERMIX"
-        });
+    subscribeUser : (request, response, next) => {
+        webpush.setVapidDetails("mailto:", publicVapidKey, privateVapidKey);
+        const idUser = request.body.idUser;
+        const subscription = request.body.subNot;
+
         databaseController.saveSubscription(request.body);
+
+
+        const payload = JSON.stringify({
+            title: "SOUSCRIPTION",
+            description: "SOUSCRIPTION AU SERVICE"
+        });
         webpush.sendNotification(subscription, payload)
             .catch(err => {
                 console.log(err)
@@ -23,10 +28,9 @@ const notif_functions = {
     sendNotificationToUsers: (request, response, next) => {
         // todo : send notification to user
         webpush.setVapidDetails("mailto:",publicVapidKey, privateVapidKey);
-
         databaseController.promiseGetEtatSubscription(request.body.cible)
             .then(res => {
-                if(res){
+                    console.log("ici--2");
                     console.log("---------------------------------------------------------------------");
                     Promise.all([databaseController.promiseGetNotifications(request.body.cible), databaseController.promiseGetSubscription(request.body.cible)])
                         .then((values) => {
@@ -54,8 +58,8 @@ const notif_functions = {
                             }
 
                         });
-                }
-            });
+                
+        });
     }
 };
 

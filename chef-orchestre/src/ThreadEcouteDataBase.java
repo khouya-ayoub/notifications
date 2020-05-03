@@ -1,3 +1,11 @@
+/*
+ * Ce projet est développé par les élèves ingénieurs :
+ *      - Ayoub KHOUYA      -     a.khouya.ing@gmail.com
+ *      - Hamza HRAMCHI      -     hramchi.hamza@gmail.com
+ *      - Yahya MOUSAOUI      -     yahyamoussaoui2014@gmail.com
+ * Copyright (c) 2020.
+ */
+
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.*;
 

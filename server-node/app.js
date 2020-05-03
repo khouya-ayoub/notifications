@@ -17,6 +17,8 @@ const userRouters = require('./routes/user');
 const testRouter = require('./routes/test');
 // import notification router
 const notificationRouter = require('./routes/notification');
+// todo
+const internRouter = require('./routes/intern-routes');
 
 // init app
 const app = express();
