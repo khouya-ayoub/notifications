@@ -3,7 +3,7 @@
  * @description File for the Notification service tslint:disable-next-line:jsdoc-format
  * */
 
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {AuthService} from './auth.service';
 import {HttpClient} from "@angular/common/http";
 import {rejects} from "assert";
@@ -15,6 +15,9 @@ export class NotificationService {
   private serverUrlAddNotif = 'http://localhost:3000/api/db/add-notification';
   private serverUrlAddUser = 'http://localhost:3000/api/db/add-user';
   private serverUrlGetNotifications = 'http://localhost:3000/api/db/get-notifications';
+  private serveurChangeStateRead = 'http://localhost:3000/api/db/chage-state-read';
+  private nombreNotification: number;
+  private listOfNotifications: any;
 
   constructor(
     private auth: AuthService,
@@ -151,8 +154,38 @@ export class NotificationService {
           {responseType: 'json'})
         .subscribe((response: { message: string, notifications: any }) => {
           console.log(response.notifications);
-          resolve(response);
+          this.listOfNotifications = response.notifications;
+          for (let i = 0; i < response.notifications; i++) {
+            this.listOfNotifications.append({
+              men_idnotification: response.notifications[i].men_idnotification,
+              mno_titre: response.notifications[i].mno_titre,
+              mno_description: response.notifications[i].mno_description,
+              etatread: false
+            });
+          }
+          this.nombreNotification = this.listOfNotifications.length;
+          resolve(this.nombreNotification);
         });
     });
+  }
+
+  changeStateRead(id: number) {
+    return new Promise(
+      (resolve) => {
+        this.serveur.post(this.serveurChangeStateRead,
+          {idNotif: id, idUser: this.auth.getUserId()}).subscribe((response: { message: string }) => {
+          resolve();
+        });
+      }
+    );
+  }
+
+
+  intiService() {
+    this.getNotification();
+  }
+
+  getListOfNotifications() {
+    return this.listOfNotifications;
   }
 }

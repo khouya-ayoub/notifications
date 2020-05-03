@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   userName: string;
   etat = false;
   etatDeNotification: string;
+  nbnotifications = 0;
 
   constructor(
     private auth: AuthService,
@@ -25,6 +26,11 @@ export class DashboardComponent implements OnInit {
     this.userName = this.auth.getUserName();
     this.etat = this.auth.getUserEtatSub();
     this.changeEtat();
+    this.notifService.getNotification().then((n) => {
+      if (typeof n === 'number') {
+        this.nbnotifications = n;
+      }
+    });
   }
 
   logout() {
@@ -34,9 +40,9 @@ export class DashboardComponent implements OnInit {
 
   changeEtat() {
     if (this.etat) {
-      this.etatDeNotification = "Notification activée";
+      this.etatDeNotification = 'Notification activée';
     } else {
-      this.etatDeNotification = "Notification désactivée";
+      this.etatDeNotification = 'Notification désactivée';
     }
   }
 
@@ -45,7 +51,7 @@ export class DashboardComponent implements OnInit {
     this.changeEtat();
     if (this.etat) {
       this.notifService.changeStateOfSubscription(1, this.auth.getUserId())
-        .then( (res) =>{
+        .then( (res) => {
           console.log(res);
         } );
       this.notifService.subscribeServiceWorker(this.publicKey);

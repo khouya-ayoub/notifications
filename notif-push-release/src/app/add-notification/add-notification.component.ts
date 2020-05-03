@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NotificationService} from "../services/notification.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {not} from "rxjs/internal-compatibility";
+import {NotificationService} from '../services/notification.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-notification',
