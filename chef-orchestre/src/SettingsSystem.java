@@ -1,3 +1,11 @@
+/*
+ * Ce projet est développé par les élèves ingénieurs :
+ *      - Ayoub KHOUYA      -     a.khouya.ing@gmail.com
+ *      - Hamza HRAMCHI      -     hramchi.hamza@gmail.com
+ *      - Yahya MOUSAOUI      -     yahyamoussaoui2014@gmail.com
+ * Copyright (c) 2020.
+ */
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -25,8 +33,8 @@ public class SettingsSystem {
     public static final String urlServeurTransit = "http://localhost:3000/api/notification/send-notification-to-user";
 
     // durées de consultation pour les threads !
-    public static final int timeOfConsultation = 5000; // milliseconds 5 min
-    public static final int timeOfNotification = 5000; // milliseconds 5 min
+    public static final int timeOfConsultation = 60000; // milliseconds 5 min
+    public static final int timeOfNotification = 60000; // milliseconds 5 min
 
 
     // fonction connexion vers la base de données

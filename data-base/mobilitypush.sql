@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  Dim 03 mai 2020 à 03:40
+-- Généré le :  Dim 03 mai 2020 à 07:12
 -- Version du serveur :  10.4.11-MariaDB-log
 -- Version de PHP :  7.4.1
 
@@ -42,6 +42,13 @@ CREATE TABLE `mb_envoie` (
   `MAV_DATESUPPR` date DEFAULT NULL,
   `MAV_ACTIVESTS` char(1) NOT NULL DEFAULT 'O'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `mb_envoie`
+--
+
+INSERT INTO `mb_envoie` (`MEN_IDENVOIE`, `MEN_IDUSER`, `MEN_IDNOTIFICATION`, `MEN_ETATENVOIE`, `MEN_ETATREAD`, `MAV_QUICREAT`, `MAV_DATECREAT`, `MAV_QUIMODIF`, `MAV_DATEMODIF`, `MAV_QUISUPPR`, `MAV_DATESUPPR`, `MAV_ACTIVESTS`) VALUES
+(1984, 1, 1, 0, 1, 'ADMIN', '2020-05-03 00:00:00', NULL, NULL, NULL, NULL, 'O');
 
 -- --------------------------------------------------------
 
@@ -84,6 +91,15 @@ CREATE TABLE `mb_notifications` (
   `MNO_ACTIVESTS` char(1) NOT NULL DEFAULT 'O'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `mb_notifications`
+--
+
+INSERT INTO `mb_notifications` (`MNO_IDNOTIFICATION`, `MNO_TITRE`, `MNO_DESCRIPTION`, `MNO_TYPE`, `MNO_ETAT`, `MNO_CIBLE`, `MNO_QUICREAT`, `MNO_DATECREAT`, `MNO_QUIMODIF`, `MNO_DATEMODIF`, `MNO_QUISUPPR`, `MNO_DATESUPPR`, `MNO_ACTIVESTS`) VALUES
+(1, 'NOTIFICATION JEAN', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 1, 1, 'SYSTEM', '2020-05-01', NULL, NULL, NULL, NULL, 'O'),
+(2, 'NOTIFICATION ETATREAD', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.', 0, 0, 1, 'SYSTEM', '2020-05-02', NULL, NULL, NULL, NULL, 'O'),
+(48315, 'Ajouté depuis le client', 'une notification ajoutée depuis le client angular', 0, 0, 1, 'Angular', '2020-02-10', NULL, NULL, NULL, NULL, 'O');
+
 -- --------------------------------------------------------
 
 --
@@ -105,6 +121,13 @@ CREATE TABLE `mb_subscriptions` (
   `MDI_ACTIVESTS` char(1) NOT NULL DEFAULT 'O'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `mb_subscriptions`
+--
+
+INSERT INTO `mb_subscriptions` (`MSU_IDSUBSCRIPTION`, `MSU_IDUSER`, `MSU_ENDPOINT`, `MSU_AUTH`, `MSU_P256DH`, `MDI_QUICREAT`, `MDI_DATECREAT`, `MDI_QUIMODIF`, `MDI_DATEMODIF`, `MDI_QUISUPPR`, `MDI_DATESUPPR`, `MDI_ACTIVESTS`) VALUES
+(65, 1, 'https://fcm.googleapis.com/fcm/send/ecGBN_n464E:APA91bHq5WLnxRxWuQXLgPfub_u1rcrcwib8tVLdLo4oSTlBuktcFsRu-ZArGZQ9WVpu8W4W5gw8X23qn_jC4-mLQzuvfeIUS5cpXT8f6AopxGEr0Enn6MmG9i9Vl9g1T447smUoeY2o', 'HP0aZwIBR4tE3X8KmWwJRA', 'BAsWGrtAmcfG7g1dMXSTTBIJIZpjz2Zhs2OPvLONfpS77MB2T7rtaw8DcoyRmmqqTWWNUesHQfS_pXKW2leq0UQ', '', '0000-00-00', NULL, NULL, NULL, NULL, 'O');
+
 -- --------------------------------------------------------
 
 --
@@ -117,7 +140,7 @@ CREATE TABLE `mb_users` (
   `MUS_PRENOM` varchar(100) NOT NULL,
   `MUS_LOGIN` varchar(150) NOT NULL,
   `MUS_PASSWORD` varchar(100) NOT NULL,
-  `MUS_ETATSUBSCRITION` int(11) NOT NULL DEFAULT 0,
+  `MUS_ETATSUBSCRIPTION` int(11) NOT NULL DEFAULT 0,
   `MUS_GROUP` int(11) DEFAULT NULL,
   `MUS_QUICREAT` varchar(150) NOT NULL,
   `MUS_DATECREAT` date NOT NULL,
@@ -132,8 +155,8 @@ CREATE TABLE `mb_users` (
 -- Déchargement des données de la table `mb_users`
 --
 
-INSERT INTO `mb_users` (`MUS_IDUSER`, `MUS_NOM`, `MUS_PRENOM`, `MUS_LOGIN`, `MUS_PASSWORD`, `MUS_ETATSUBSCRITION`, `MUS_GROUP`, `MUS_QUICREAT`, `MUS_DATECREAT`, `MUS_QUIMODIF`, `MUS_DATEMODIF`, `MUS_QUISUPPR`, `MUS_DATESUPPR`, `MUS_ACTIVESTS`) VALUES
-(1, 'DUPONT', 'Jean', 'admin@cermix.fr', 'admin', 0, NULL, 'ADMIN', '2020-05-01', NULL, NULL, NULL, NULL, 'O');
+INSERT INTO `mb_users` (`MUS_IDUSER`, `MUS_NOM`, `MUS_PRENOM`, `MUS_LOGIN`, `MUS_PASSWORD`, `MUS_ETATSUBSCRIPTION`, `MUS_GROUP`, `MUS_QUICREAT`, `MUS_DATECREAT`, `MUS_QUIMODIF`, `MUS_DATEMODIF`, `MUS_QUISUPPR`, `MUS_DATESUPPR`, `MUS_ACTIVESTS`) VALUES
+(1, 'DUPONT', 'Jean', 'admin@cermix.fr', '$2b$10$L49X1ZGpvXDA2FJjOCte7O1EV7ScAzAoN3nqYDVy7BGumYS/IBGTu', 1, NULL, 'ADMIN', '2020-05-01', NULL, NULL, NULL, NULL, 'O');
 
 --
 -- Index pour les tables déchargées
@@ -186,7 +209,7 @@ ALTER TABLE `mb_envoie`
 -- AUTO_INCREMENT pour la table `mb_groupe`
 --
 ALTER TABLE `mb_groupe`
-  MODIFY `MGR_IDGROUPE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `MGR_IDGROUPE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `mb_notifications`
@@ -204,7 +227,7 @@ ALTER TABLE `mb_subscriptions`
 -- AUTO_INCREMENT pour la table `mb_users`
 --
 ALTER TABLE `mb_users`
-  MODIFY `MUS_IDUSER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `MUS_IDUSER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées
