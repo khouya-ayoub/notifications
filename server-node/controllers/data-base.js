@@ -137,7 +137,7 @@ const database_functions = {
     },
     promiseGetEtatSubscription: (idUser) => {
       return new Promise( (resolve, reject) => {
-         let sql = "SELECT MUS_ETATSUBSCRITION FROM mb_users WHERE MUS_IDUSER = ?";
+         let sql = "SELECT MUS_ETATSUBSCRIPTION FROM mb_users WHERE MUS_IDUSER = ?";
          conn.query(sql, [idUser], (err, res) => {
             if(err || res.length === 0){
                 console.log(err);
@@ -217,17 +217,29 @@ const database_functions = {
             }));
     },
     getUserNotifications: (request, response, next) => {
-        let sql = "SELECT E.men_idnotification, mno_titre, mno_description FROM mb_notifications N, mb_envoie E" +
-            " WHERE E.men_iduser = ? AND N.mno_idnotification = E.men_idnotification and E.men_etatread = 0";
+        let sql = "SELECT men_idnotification, mno_titre, mno_description FROM mb_notifications N, mb_envoie E WHERE E.men_iduser = ? AND N.mno_idnotification = E.men_idnotification and E.men_etatread = 0";
         conn.query(sql, [request.body.idUser], (err, res) => {
             if(err || res.length === 0) {
                 console.log(err);
-                return response.status(400).json({ error: 'error ' + err, message: 'error'});
+                return response.status(500).json({ error: 'error ' + err, message: 'error'});
             }
             else{
                 return response.status(200).json({ message: 'bien recu', notifications: res });
             }
         });
+    },
+    chageStateRead: (request, response, next) => {
+        let sql = "UPDATE MB_ENVOIE set MEN_ETATREAD = 1 WHERE MEN_IDNOTIFICATION = ? AND  MEN_IDUSER = ?";
+        conn.query(sql, [request.body.idNotif, request.body.idUser], (err, res) => {
+            if(err || res.length === 0) {
+                console.log(err);
+                return response.status(500).json({ error: 'error ' + err, message: 'error'});
+            }
+            else{
+                return response.status(200).json({ message: 'bien recu'});
+            }
+        });
+
     }
 };
 
