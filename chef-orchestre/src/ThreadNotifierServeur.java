@@ -28,10 +28,13 @@ public class ThreadNotifierServeur extends Thread {
                     while(resultSet.next()){
                         new ThreadNotifier(resultSet.getInt("men_iduser")).start();
                     }
-                }catch(SQLException ignored){}
+                }catch(Exception e){
+                    e.getMessage();
+                    System.out.println("Connexion echouée à la base de données ");
+                }
                 Thread.sleep(SettingsSystem.timeOfNotification);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                e.getMessage();
                 this.run();
             }
         }

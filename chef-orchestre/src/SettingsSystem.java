@@ -18,15 +18,15 @@ public class SettingsSystem {
     public static final String password = "";
 
     // des requetes utilisées
-    public static final String sqlSelectNotifications = "SELECT mno_idnotification, mno_cible FROM mb_notifications WHERE mno_etat = 0";
-    public static final String sqlSelectFromEnvoieToNotify = "SELECT men_iduser, men_iduser FROM mb_envoie WHERE men_etatenvoie = 0";
+    public static final String sqlSelectNotifications = "SELECT mno_idnotification, mno_type, mno_cible FROM mb_notifications WHERE mno_etat = 0";
+    public static final String sqlSelectFromEnvoieToNotify = "SELECT men_iduser FROM mb_envoie WHERE men_etatenvoie = 0";
 
     // lien de connexion avec le serveur node JS
     public static final String urlServeurTransit = "http://localhost:3000/api/notification/send-notification-to-user";
 
     // durées de consultation pour les threads !
-    public static final int timeOfConsultation = 60000; // milliseconds 5 min
-    public static final int timeOfNotification = 60000; // milliseconds 5 min
+    public static final int timeOfConsultation = 5000; // milliseconds 5 min
+    public static final int timeOfNotification = 5000; // milliseconds 5 min
 
 
     // fonction connexion vers la base de données
